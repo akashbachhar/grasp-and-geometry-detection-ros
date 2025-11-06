@@ -6,31 +6,17 @@ A complete ROS pipeline for grasp pose generation using GPD and object geometry 
 <table>
   <tr>
     <td align="center">
-      <p><strong>Box</strong></p>
+      <p><strong>Pose Detected by GPD</strong></p>
       <img src="assets/pose.png" width="300" height="300" />
     </td>
     <td align="center">
-      <p><strong>Cylinder</strong></p>
-      <img src="assets/planning.gif" width="300" height="300" />
-    </td>
-  </tr>
-</table>## Demo Videos
-
-<table>
-  <tr>
-    <td align="center">
-      <p><strong>Box</strong></p>
-      <img src="assets/pose.png" width="300" height="300" />
-    </td>
-    <td align="center">
-      <p><strong>Cylinder</strong></p>
+      <p><strong>UR5e Planning</strong></p>
       <img src="assets/planning.gif" width="300" height="300" />
     </td>
   </tr>
 </table>
+
 ## Setup & Run
-
-
 ### Workspace setup
 ```bash
 # cut the gpd folder out of grasp-and-geometry-detection-ros to home directory
