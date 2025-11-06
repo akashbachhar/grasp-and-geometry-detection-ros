@@ -36,7 +36,7 @@ source devel/setup.bash
 * PCL 1.9 or newer
 * Eigen 3.0 or newer
 * OpenCV 3.4 or newer
-If you have ROS installed, you should be good to go.
+* If you have ROS installed, you should be good to go.
 
 **Build the package:**
 ```bash
