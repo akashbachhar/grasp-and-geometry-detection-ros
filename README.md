@@ -19,7 +19,7 @@ A complete ROS pipeline for grasp pose generation using GPD and object geometry 
 ## Setup & Run
 ### Workspace setup
 ```bash
-# cut the gpd folder out of grasp-and-geometry-detection-ros to home directory
+# cut the gpd folder to home directory
 mv grasp-and-geometry-detection-ros/gpd ~/
 
 
