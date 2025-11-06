@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="robotiq_hande" params="prefix parent *origin">
+
+    <joint name="${prefix}robotiq_hande_base_joint" type="fixed">
+      <parent link="${parent}" />
+      <child link="${prefix}robotiq_hande_base_link" />
+      <xacro:insert_block name="origin" />
+    </joint>
+
+    <link name="${prefix}robotiq_hande_base_link">
+      <inertial>
+        <origin xyz="0 0 0.04607" rpy="${pi/2} 0 ${pi/2}" />
+        <mass value="0.86387" />
+        <inertia ixx="1017560E-9" ixy="0" ixz="2235E-9" iyy="1028041E-9" iyz="0" izz="489810E-9" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
+        <geometry>
+          <mesh filename="package://ur5e_moveit/meshes/gripper/visual/hand-e.dae"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="Gazebo/Black">
+          <color rgba="0.1 0.1 0.1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
+        <geometry>
+          <mesh filename="package://ur5e_moveit/meshes/gripper/visual/hand-e.dae"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <gazebo reference="${prefix}robotiq_hande_base_link">
+      <material>Gazebo/Black</material>
+      <selfCollide>True</selfCollide>
+    </gazebo>
+
+    <link name="${prefix}robotiq_hande_left_finger">
+      <inertial>
+        <origin xyz="0.02262 -0.00759 0.00738" rpy="${pi/2} 0 ${pi/2}" />
+        <mass value="0.03804" />
+        <inertia ixx="13567E-9" ixy="1849E-9" ixz="3622E-9" iyy="15784E-9" iyz="3616E-9"
+          izz="7478E-9" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
+        <geometry>
+          <mesh filename="package://ur5e_moveit/meshes/gripper/visual/hand-e_finger_1.dae"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="Gazebo/Grey">
+          <color rgba="0.1 0.1 0.1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
+        <geometry>
+          <mesh filename="package://ur5e_moveit/meshes/gripper/visual/hand-e_finger_1.dae"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+    <gazebo reference="${prefix}robotiq_hande_left_finger">
+      <material>Gazebo/Grey</material>
+      <selfCollide>True</selfCollide>
+    </gazebo>
+
+    <link name="${prefix}robotiq_hande_right_finger">
+      <inertial>
+        <origin xyz="-0.02262 0.00759 0.00738" rpy="${pi/2} 0 ${pi/2}" />
+        <mass value="0.03804" />
+        <inertia ixx="13567E-9" ixy="1849E-9" ixz="-3622E-9" iyy="15784E-9" iyz="-3616E-9"
+          izz="7478E-9" />
+      </inertial>
+      <visual>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
+        <geometry>
+          <mesh filename="package://ur5e_moveit/meshes/gripper/visual/hand-e_finger_2.dae"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+        <material name="Gazebo/Grey">
+          <color rgba="0.1 0.1 0.1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
+        <geometry>
+          <mesh filename="package://ur5e_moveit/meshes/gripper/visual/hand-e_finger_2.dae"
+            scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <gazebo reference="${prefix}robotiq_hande_right_finger">
+      <material>Gazebo/Grey</material>
+      <selfCollide>True</selfCollide>
+    </gazebo>
+
+    <joint name="${prefix}robotiq_hande_joint_finger" type="prismatic">
+      <origin xyz="0.099 0 0" rpy="0 0 0" />
+      <parent link="${prefix}robotiq_hande_base_link" />
+      <child link="${prefix}robotiq_hande_left_finger" />
+      <axis xyz="0 -1 0" />
+      <limit effort="130" lower="0" upper="0.025" velocity="0.15" />
+      <dynamics damping="0.1" friction="0" />
+    </joint>
+
+    <joint name="${prefix}robotiq_hande_base_to_right_finger" type="prismatic">
+      <origin xyz="0.099 0 0" rpy="0 0 0" />
+      <parent link="${prefix}robotiq_hande_base_link" />
+      <child link="${prefix}robotiq_hande_right_finger" />
+      <axis xyz="0 1 0" />
+      <limit effort="130" lower="0" upper="0.025" velocity="0.15" />
+      <mimic joint="${prefix}robotiq_hande_joint_finger" multiplier="1" offset="0" />
+    </joint>
+
+    <transmission name="${prefix}robotiq_hande_joint_finger_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}robotiq_hande_joint_finger">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${prefix}robotiq_hande_joint_finger_motor">
+        <mechanicalReduction>1</mechanicalReduction>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </actuator>
+    </transmission>
+
+    <gazebo>
+      <plugin name="${prefix}mimic_robotiq_hande"
+        filename="libroboticsgroup_upatras_gazebo_mimic_joint_plugin.so">
+        <joint>${prefix}robotiq_hande_joint_finger</joint>
+        <mimicJoint>${prefix}robotiq_hande_base_to_right_finger</mimicJoint>
+        <multiplier>1.0</multiplier>
+        <offset>0</offset>
+      </plugin>
+    </gazebo>
+
+     <gazebo>
+      <plugin name="${prefix}gazebo_grasp_fix" filename="libgazebo_grasp_fix.so">
+        <arm>
+          <arm_name>ur5e_arm</arm_name>
+          <palm_link>wrist_3_link</palm_link>
+          <gripper_link>${prefix}robotiq_hande_left_finger</gripper_link>
+          <gripper_link>${prefix}robotiq_hande_right_finger</gripper_link>
+        </arm>
+        <forces_angle_tolerance>100</forces_angle_tolerance>
+        <update_rate>4</update_rate>
+        <grip_count_threshold>1</grip_count_threshold>
+        <max_grip_count>6</max_grip_count>
+        <release_tolerance>0.0005</release_tolerance>
+        <disable_collisions_on_attach>false</disable_collisions_on_attach>
+        <contact_topic>__default_topic__</contact_topic>
+      </plugin>
+    </gazebo>
+</xacro:macro>
+
+
+</robot>

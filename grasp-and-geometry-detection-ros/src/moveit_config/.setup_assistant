@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ur5e_moveit
+    relative_path: urdf/ur5ehand.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/ur5e_robot.srdf
+  CONFIG:
+    author_name: Akash Bachhar
+    author_email: akashbachhar2001@gmail.com
+    generated_timestamp: 1753965030

@@ -1,0 +1,26 @@
+<launch>
+  <!-- Launch Gazebo with empty world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+
+  <!-- Robot description -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find ur5e_moveit)/urdf/ur5ehand.urdf.xacro'" />
+
+  <!-- Spawn robot into Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -model ur5e -param robot_description"
+        output="screen"/>
+
+  <!-- Robot state publisher -->
+   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+    <remap from="/joint_states" to="/ur5e/joint_states"/>
+  </node>
+  <!-- Load controller configs -->
+  <rosparam file="$(find ur5e_moveit)/config/controllers.yaml" command="load"/>
+
+  <!-- Spawn controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        args="joint_state_controller ur5e_arm_controller ur5e_gripper_controller"
+        ns="/ur5e"
+        output="screen"/>  
+</launch>

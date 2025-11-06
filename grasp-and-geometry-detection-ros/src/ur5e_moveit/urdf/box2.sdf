@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="test_cylinder">
+    <static>false</static>
+    <pose>0.12 0.56 0.325 0 0 0</pose> 
+    <link name="cylinder_link">
+      <collision name="collision">
+        <geometry>
+          <cylinder>
+            <radius>0.015</radius>
+            <length>0.15</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <cylinder>
+            <radius>0.015</radius>
+            <length>0.15</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0 1 0 1</ambient>
+          <diffuse>0 1 0 1</diffuse>
+        </material>
+      </visual>
+      <inertial>
+        <mass>1.0</mass>
+      </inertial>
+    </link>
+  </model>
+</sdf>
