@@ -1,0 +1,35 @@
+# --- General ---
+*.swp
+*.bak
+*.tmp
+*.log
+*.DS_Store
+*.~*
+
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+venv/
+env/
+build/
+dist/
+
+# --- ROS & Catkin ---
+devel/
+build/
+log/
+install/
+.catkin_workspace
+CMakeLists.txt.user
+
+# --- VSCode ---
+.vscode/
+.history/
+.settings/
+
+# --- JetBrains / CLion ---
+.idea/
+cmake-build-*/
