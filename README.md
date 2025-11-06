@@ -1,7 +1,33 @@
-# Grasp and Geometry Detection ROS
+# Grasp and Geometry Detection (ROS)
 A complete ROS pipeline for grasp pose generation using GPD and object geometry pose detection via point cloud clustering and bounding box fitting.
 
+## Demo
 
+<table>
+  <tr>
+    <td align="center">
+      <p><strong>Box</strong></p>
+      <img src="assets/pose.png" width="300" height="300" />
+    </td>
+    <td align="center">
+      <p><strong>Cylinder</strong></p>
+      <img src="assets/planning.gif" width="300" height="300" />
+    </td>
+  </tr>
+</table>## Demo Videos
+
+<table>
+  <tr>
+    <td align="center">
+      <p><strong>Box</strong></p>
+      <img src="assets/pose.png" width="300" height="300" />
+    </td>
+    <td align="center">
+      <p><strong>Cylinder</strong></p>
+      <img src="assets/planning.gif" width="300" height="300" />
+    </td>
+  </tr>
+</table>
 ## Setup & Run
 
 
